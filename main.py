@@ -11,8 +11,9 @@ def draw():
     display.fill([48, 65, 92])
 
 # Grupo de Sprites
+
 drawGame = pygame.sprite.Group()
-drawGame.player = Player(drawGame)
+player = Player(drawGame)
 
 # Musicas
 # Tocar essa apenas em boss
@@ -21,11 +22,12 @@ pygame.mixer.music.play(-1)
 
 # Sons(Player/Ambiente)
 LaserShoot = pygame.mixer.Sound("data/soundtrack/LaserGun.wav")
-
+fps = pygame.time.Clock()
 # Game rodando
 GameLoop = True
 if __name__ == '__main__':
     while GameLoop:
+        fps.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # Sair do Jogo
                 GameLoop = False
@@ -36,5 +38,5 @@ if __name__ == '__main__':
         # Tela
         draw()
         drawGame.draw(display)
-        drawGame.player.update()
+        drawGame.update()
         pygame.display.update()
