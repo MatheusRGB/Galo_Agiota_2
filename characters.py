@@ -2,6 +2,9 @@ import pygame
 import os
 
 # Personagem principal
+Gravity = 5
+
+
 class Player(pygame.sprite.Sprite):
     def __init__(self, *groups):
         super().__init__(*groups)
@@ -38,7 +41,7 @@ class Player(pygame.sprite.Sprite):
 
         self.current = 0
         self.image = self.sprites[self.current]
-        self.rect = pygame.Rect(800, 400, 100, 100)
+        self.rect = pygame.Rect(500, 200, 50, 5550)
 
     def update(self):
         keys = pygame.key.get_pressed()
@@ -52,17 +55,20 @@ class Player(pygame.sprite.Sprite):
             self.rect.x -= 1
             self.orientation = "Right"
             self.animation("run")
+            print("teste")
 
         if keys[pygame.K_d]:
             self.rect.x += 1
             self.orientation = "Left"
             self.animation("run")
-        
+            print("teste2")
+
         if keys[pygame.K_s]:
             self.rect.y += 1
             self.animation("idle")
 
         self.flipAnimation()
+        self.rect[1] += Gravity
 
     def animation(self, str):
         if not self.jump:
@@ -88,7 +94,7 @@ class Player(pygame.sprite.Sprite):
             self.jump = False
             self.run = False
             self.current = 0
-        
+
         # if str == "jump":
         #     self.idle[0] = False
         #     self.jump[0] = True
@@ -108,17 +114,17 @@ class Player(pygame.sprite.Sprite):
         #         self.jump[0] = False
         #         self.current = self.jump[1]
         #         self.idle[0] = True
-        
+
         self.image = self.sprites[int(self.current)]
         self.image = pygame.transform.flip(self.image, self.moving_right, False)
 
     def swapAnimation(self, str):
         self.current = 0
         self.sprites = []
-        for dir,_,files in os.walk(self.folder):
+        for dir, _, files in os.walk(self.folder):
             for file in files:
-                if dir == self.folder+str:
-                    self.sprites.append(pygame.image.load(os.path.join(dir,file)))
+                if dir == self.folder + str:
+                    self.sprites.append(pygame.image.load(os.path.join(dir, file)))
         self.image = self.sprites[self.current]
 
     def flipAnimation(self):
