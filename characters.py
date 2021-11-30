@@ -10,7 +10,10 @@ class Player(pygame.sprite.Sprite):
         self.jump = False
         self.run = False
         self.folder = "data/character/"
+        self.orientation = "Right"
+        self.moving_right = False  # Trocar o valor da variavel inverte orientação da imagem 
         self.swapAnimation("idle")
+        self.flipAnimation()
 
         # self.idle = [True, False, False] # Estado/Inicio/Fim
         # self.jump = [False, False, False]
@@ -47,15 +50,19 @@ class Player(pygame.sprite.Sprite):
 
         if keys[pygame.K_a]:
             self.rect.x -= 1
+            self.orientation = "Right"
             self.animation("run")
 
         if keys[pygame.K_d]:
             self.rect.x += 1
+            self.orientation = "Left"
             self.animation("run")
         
         if keys[pygame.K_s]:
             self.rect.y += 1
             self.animation("idle")
+
+        self.flipAnimation()
 
     def animation(self, str):
         if not self.jump:
@@ -75,7 +82,7 @@ class Player(pygame.sprite.Sprite):
                 self.swapAnimation(str)
         else:
             self.current += 0.15
-            
+
         if self.current >= len(self.sprites):
             self.idle = True
             self.jump = False
@@ -103,6 +110,7 @@ class Player(pygame.sprite.Sprite):
         #         self.idle[0] = True
         
         self.image = self.sprites[int(self.current)]
+        self.image = pygame.transform.flip(self.image, self.moving_right, False)
 
     def swapAnimation(self, str):
         self.current = 0
@@ -112,3 +120,9 @@ class Player(pygame.sprite.Sprite):
                 if dir == self.folder+str:
                     self.sprites.append(pygame.image.load(os.path.join(dir,file)))
         self.image = self.sprites[self.current]
+
+    def flipAnimation(self):
+        if self.orientation == "Right":
+            self.moving_right = False
+        elif self.orientation == "Left":
+            self.moving_right = True
