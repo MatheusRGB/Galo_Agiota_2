@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c502ee52-e714-4530-bd27-b5f2c2aac1cf" name="Changes" comment="Galo Agiota 2 (0.1)&#10;&#10;-Testes de movimento, tela e som.">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/characters.py" beforeDir="false" afterPath="$PROJECT_DIR$/characters.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    <list default="true" id="c502ee52-e714-4530-bd27-b5f2c2aac1cf" name="Changes" comment="Adicionados:&#10;-Tela de Fundo&#10;-Chao&#10;-Gravidade&#10;-Colisao com o chao">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager" show_ignored="true" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -80,7 +78,21 @@
       <option name="project" value="LOCAL" />
       <updated>1637863863495</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Adicionados:&#10;-Tela de Fundo&#10;-Chao&#10;-Gravidade&#10;-Colisao com o chao">
+      <created>1638300435374</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1638300435374</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Adicionados:&#10;-Tela de Fundo&#10;-Chao&#10;-Gravidade&#10;-Colisao com o chao">
+      <created>1638300521365</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1638300521365</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -97,6 +109,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Primeira versão&#10;&#10;-Testes de movimento, tela e som." />
-    <option name="LAST_COMMIT_MESSAGE" value="Primeira versão&#10;&#10;-Testes de movimento, tela e som." />
+    <MESSAGE value="Adicionados:&#10;-Tela de Fundo&#10;-Chao&#10;-Gravidade&#10;-Colisao com o chao" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adicionados:&#10;-Tela de Fundo&#10;-Chao&#10;-Gravidade&#10;-Colisao com o chao" />
   </component>
 </project>
