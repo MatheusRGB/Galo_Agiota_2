@@ -2,6 +2,7 @@ import pygame
 from utils import *
 from animations import *
 
+
 # Personagem principal
 class Player():
     def __init__(self, sprites):

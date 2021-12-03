@@ -2,6 +2,8 @@ import pygame
 from characters import *
 from world import *
 from utils import *
+
+
 # Initiation
 pygame.init()
 display = pygame.display.set_mode([WIDTH, HEIGHT])
