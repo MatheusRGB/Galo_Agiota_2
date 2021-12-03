@@ -1,24 +1,33 @@
 import pygame
 from characters import *
-
+from world import *
+from utils import *
 # Initiation
 pygame.init()
-display = pygame.display.set_mode([1280, 720])
-pygame.display.set_caption('Galo Agiota 2')
-
-# Fundo de tela
-def draw():
-    display.fill([48, 65, 92])
-
-# Grupo de Sprites
+display = pygame.display.set_mode([WIDTH, HEIGHT])
+pygame.display.set_caption("Galo Agiota 2")
 
 drawGame = pygame.sprite.Group()
-player = Player(drawGame)
+world = World(None)
+player = Player(world.ground)
+
+drawGame.add(world.background)
+drawGame.add(world.ground)
+drawGame.add(player.animations)
+
+# Organizando as funçoes
+def draw():
+    drawGame.draw(display)
+
+def update():
+    drawGame.update()
+    player.update()
+    #world.update()
 
 # Musicas
 # Tocar essa apenas em boss
-pygame.mixer.music.load("data/soundtrack/BossMusic.mp3")
-pygame.mixer.music.play(-1)
+# pygame.mixer.music.load("data/soundtrack/BossMusic.mp3")
+# pygame.mixer.music.play(-1)
 
 # Sons(Player/Ambiente)
 LaserShoot = pygame.mixer.Sound("data/soundtrack/LaserGun.wav")
@@ -37,6 +46,5 @@ if __name__ == '__main__':
                     LaserShoot.play()
         # Tela
         draw()
-        drawGame.draw(display)
-        drawGame.update()
+        update()
         pygame.display.update()
