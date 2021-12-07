@@ -24,7 +24,7 @@ def draw():
 def update():
     drawGame.update()
     player.update()
-    #world.update()
+    world.update()
 
 # Musicas
 # Tocar essa apenas em boss

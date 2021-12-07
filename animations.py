@@ -1,6 +1,7 @@
 import pygame
 import os
 
+
 class Animations(pygame.sprite.Sprite):
     def __init__(self, x, y, w, h, action, speed, folder, orientation):
         pygame.sprite.Sprite.__init__(self)

@@ -2,7 +2,6 @@ import pygame
 from utils import *
 from animations import *
 
-
 # Personagem principal
 class Player():
     def __init__(self, sprites):
@@ -51,8 +50,6 @@ class Player():
             self.animations.rect.y += self.physics.gravity
             self.controller("jump")
         else:
-            self.physics.diff = False
-            self.physics.fall = False
             if self.jump and not self.idle:
                 self.controller("idle")
             if self.run and not self.idle:
