@@ -41,6 +41,8 @@ class Physics():
         self.character = sprites1
         self.world = sprites2
         self.collide = False
+        self.left = 5
+        self.right = 5
         self.fall = True
         self.up = not self.fall
         self.height = 180
@@ -52,9 +54,24 @@ class Physics():
         self.smooth = 0.4
 
     def update(self):
-        self.collide = pygame.Rect.colliderect(self.character.rect, self.world.rect)
+        self.collision()
         self.maxJumpHeight()
         self.gravityController()
+
+    def collision(self):
+        for i in range(len(self.world)):
+            self.collide = pygame.Rect.colliderect(self.character.rect, self.world[i])
+            for j in range(len(self.world)):
+                if abs(self.world[j].rect.right - self.character.rect.left) == 0 and self.world[j].rect.top - self.character.rect.bottom < 0:
+                    self.left = 0
+                else:
+                    self.left = 5
+                if abs(self.world[j].rect.left - self.character.rect.right) == 0 and self.world[j].rect.top - self.character.rect.bottom < 0:
+                    self.right = 0
+                else:
+                    self.right = 5
+            if self.collide:
+                break
 
     def maxJumpHeight(self):
         if self.collide:

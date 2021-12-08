@@ -3,19 +3,17 @@ from characters import *
 from world import *
 from utils import *
 
-
 # Initiation
 pygame.init()
 display = pygame.display.set_mode([WIDTH, HEIGHT])
 pygame.display.set_caption("Galo Agiota 2")
 
 drawGame = pygame.sprite.Group()
-world = World(None)
-player = Player(world.ground)
-
+world = World()
+player = Player(world.collide)
 drawGame.add(world.background)
-drawGame.add(world.ground)
 drawGame.add(player.animations)
+drawGame.add(world.objects)
 
 # Organizando as funçoes
 def draw():
@@ -24,7 +22,7 @@ def draw():
 def update():
     drawGame.update()
     player.update()
-    world.update()
+    #world.update()
 
 # Musicas
 # Tocar essa apenas em boss

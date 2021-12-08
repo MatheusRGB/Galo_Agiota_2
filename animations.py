@@ -1,9 +1,8 @@
 import pygame
 import os
 
-
 class Animations(pygame.sprite.Sprite):
-    def __init__(self, x, y, w, h, action, speed, folder, orientation):
+    def __init__(self, x, y, w, h, action, speed, folder, orientation, loop):
         pygame.sprite.Sprite.__init__(self)
         self.x = x
         self.y = y
@@ -16,21 +15,25 @@ class Animations(pygame.sprite.Sprite):
         self.folder = folder
         self.orientation = orientation
         self.bool = True
-        self.loop = False
+        self.loop = loop
         self.inverted = self.bool
         self.image = False
         self.current = 0
         self.swapAnimation(self.action)
         self.rect = pygame.Rect(self.x, self.y, self.w, self.h)
-        
+
     def animation(self, loop):
-        if self.loop or loop:
+        if loop:
             self.current += self.speed
             if self.current > self.size:
                 self.current = 0
         self.image = self.sprites[int(self.current)]
         self.image = pygame.transform.scale(self.image, (self.w, self.h))
         self.flipAnimation()
+
+    def update(self):
+        if self.loop:
+            self.animation(self.loop)
 
     def swapAnimation(self, str):
         self.action = str

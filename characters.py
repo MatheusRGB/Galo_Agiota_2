@@ -5,9 +5,8 @@ from animations import *
 # Personagem principal
 class Player():
     def __init__(self, sprites):
-        self.data = sprites
-        self.animations = Animations(100, 100, 100, 100, "idle", 0.15, "data/character/", "Right")
-        self.physics = Physics(self.animations, self.data)
+        self.animations = Animations(100, 100, 100, 100, "idle", 0.15, "data/character/", "Right", False)
+        self.physics = Physics(self.animations, sprites)
         self.idle = True
         self.jump = False
         self.run = False
@@ -24,12 +23,12 @@ class Player():
                 self.controller("jump")
 
         if self.keys[pygame.K_a]:
-            self.animations.rect.x -= 5
+            self.animations.rect.x -= self.physics.left
             self.animations.orientation = "Left"
             self.controller("run")
 
         if self.keys[pygame.K_d]:
-            self.animations.rect.x += 5
+            self.animations.rect.x += self.physics.right
             self.animations.orientation = "Right"
             self.controller("run")
 
