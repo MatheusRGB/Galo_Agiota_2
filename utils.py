@@ -79,6 +79,7 @@ class Physics():
                 if widht - left > 0 and widht - left < widht and down > 0 and down < height - down:
                     self.collide = False
                     self.fall = True
+                if self.right == 0 or self.left == 0:
                     break
             if self.collide:
                 break
