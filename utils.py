@@ -62,14 +62,24 @@ class Physics():
         for i in range(len(self.world)):
             self.collide = pygame.Rect.colliderect(self.character.rect, self.world[i])
             for j in range(len(self.world)):
-                if abs(self.world[j].rect.right - self.character.rect.left) == 0 and self.world[j].rect.top - self.character.rect.bottom < 0:
+                up = self.world[j].rect.top - self.character.rect.bottom
+                down = self.world[j].rect.bottom - self.character.rect.top
+                left = self.world[j].rect.right - self.character.rect.left
+                right = self.world[j].rect.left - self.character.rect.right
+                widht = left - right
+                height = down - up
+                if left == 0 and up < 0 and down > 0:
                     self.left = 0
                 else:
                     self.left = 5
-                if abs(self.world[j].rect.left - self.character.rect.right) == 0 and self.world[j].rect.top - self.character.rect.bottom < 0:
+                if right == 0 and up < 0 and down > 0:
                     self.right = 0
                 else:
                     self.right = 5
+                if widht - left > 0 and widht - left < widht and down > 0 and down < height - down:
+                    self.collide = False
+                    self.fall = True
+                    break
             if self.collide:
                 break
 
@@ -106,8 +116,3 @@ class Physics():
             self.fall = False
             #self.smooth = 0
             self.gravity = self.min_gravity
-
-
-
-        
-
