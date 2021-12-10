@@ -3,6 +3,7 @@ import pygame
 WIDTH = 1280
 HEIGHT = 720
 
+
 class Text():
     def __init__(self, text, x, y, w, h, fontName, size, cr, cg, cb):
         self.text = text or ""
@@ -17,6 +18,7 @@ class Text():
         self.cg = cg
         self.cb = cb
         self.font = pygame.font.SysFont(self.folder+self.font, self.size)
+
 
 class Image(pygame.sprite.Sprite):
     def __init__(self, x, y, w, h, data):
@@ -36,6 +38,7 @@ class Image(pygame.sprite.Sprite):
         self.rect.x = self.x
         self.rect.y = self.y
 
+
 class Physics():
     def __init__(self, sprites1, sprites2):
         self.character = sprites1
@@ -54,6 +57,11 @@ class Physics():
         self.smooth = 1
 
     def update(self):
+        for i in range(len(self.world)):
+            self.collide = pygame.Rect.colliderect(
+                self.character.rect, self.world[i])
+            if self.collide:
+                break
         self.collision()
         self.maxJumpHeight()
         self.gravityController()
@@ -61,29 +69,26 @@ class Physics():
     def collision(self):
         limit = False
         for i in range(len(self.world)):
-            self.collide = pygame.Rect.colliderect(self.character.rect, self.world[i])
             up = self.world[i].rect.top - self.character.rect.bottom
             down = self.world[i].rect.bottom - self.character.rect.top
             left = self.world[i].rect.right - self.character.rect.left
             right = self.world[i].rect.left - self.character.rect.right
             width = left - right
             height = down - up
-            if down > 0 and down <= height-self.max_gravity:
-                if width - left == 0: 
+            if down > 0 and down < height-self.max_gravity:
+                if width - left == 0:
                     self.right = 0
                     limit = True
                 if width - left == width:
                     self.left = 0
                     limit = True
             if down <= 0 and down+self.gravity >= 0:
-                if width - left > 0 and width - left < width: 
+                if width - left > 0 and width - left < width:
                     self.collide = False
                     self.fall = True
             if not limit:
                 self.left = 5
                 self.right = 5
-            if self.collide:
-                break
 
     def maxJumpHeight(self):
         if self.collide:
