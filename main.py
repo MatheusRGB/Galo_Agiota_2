@@ -40,7 +40,7 @@ drawMenu.add(world.ground)
 # pygame.mixer.music.play(-1)
 
 # Sons(Player/Ambiente)
-LaserShoot = pygame.mixer.Sound("data/soundtrack/LaserGun.wav")
+
 
 fps = pygame.time.Clock()
 
@@ -75,9 +75,6 @@ if __name__ == '__main__':
                 GameLoop = False
 
             if event.type == pygame.KEYDOWN:  # Executar Som de Tiro
-                if event.key == pygame.K_SPACE:
-                    LaserShoot.play()
-
                 if event.key == pygame.K_p:  # Tecla para começar o jogo
                     MenuState = 0
 
