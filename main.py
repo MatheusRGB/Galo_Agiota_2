@@ -3,6 +3,8 @@ from characters import *
 from world import *
 from utils import *
 from menu import *
+#TESTE DE NOVA PASTA
+
 # Initiation
 pygame.init()
 display = pygame.display.set_mode([WIDTH, HEIGHT])
@@ -19,14 +21,12 @@ drawGame.add(player.animations)
 drawGame.add(world.objects)
 
 
-#Menu do Jogo
+# Menu do Jogo
 menu = Menu(None)
 
 
 drawMenu.add(menu.background)
 drawMenu.add(menu.button1)
-drawMenu.add(menu.button2)
-drawMenu.add(menu.button3)
 
 # Cenario do Menu
 drawMenu.add(world.water)
@@ -47,6 +47,8 @@ fps = pygame.time.Clock()
 MenuState = 1
 
 # Organizando as funçoes
+
+
 def draw():
     if MenuState == 0:
         drawGame.draw(display)
@@ -75,7 +77,7 @@ if __name__ == '__main__':
                 if event.key == pygame.K_SPACE:
                     LaserShoot.play()
 
-                if event.key == pygame.K_p: # Tecla para começar o jogo
+                if event.key == pygame.K_p:  # Tecla para começar o jogo
                     MenuState = 0
 
         # Tela
