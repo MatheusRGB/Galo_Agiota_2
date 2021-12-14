@@ -6,6 +6,7 @@ from estruturas import *
 
 class World():
     def __init__(self):
+        self.stage = 0
         self.background = Image(0, 0, WIDTH, HEIGHT, "data/environment/bg.png")
         self.ground = Image(0, HEIGHT-125, WIDTH-200, 75,
                             "data/environment/ground.png")
@@ -13,6 +14,10 @@ class World():
                                 "data/environment/plataform.png")
         self.water = Image(0, HEIGHT-50, WIDTH, 50,
                            "data/environment/water/water.png")
+
+        self.spikes = Image(250, HEIGHT, 50, 50,
+                                "data/traps/Off.png")
+
         self.waterfall = None
         self.collide = []
         self.objects = []
@@ -23,6 +28,9 @@ class World():
         self.objects.append(self.plataforms)
         self.createAnimatedWater()
         self.plataform()
+        self.spike()
+
+
 
     def createAnimatedWater(self):
         amount = 10
@@ -51,3 +59,18 @@ class World():
                         plataforms_objeto[i][0], plataforms_objeto[i][1] + (x * 48), 50, 50, "data/environment/plataform.png")
                     self.objects.append(self.plataforms)
                     self.collide.append(self.plataforms)
+
+    def spike(self):
+        for i in range(len(spikes_objeto)):
+            for x in range(spikes_objeto[i][2]):
+
+                if spikes_objeto[i][3] == 0:
+                    self.spikes = Image(
+                       spikes_objeto[i][0] + (x * 48), spikes_objeto[i][1], 50, 50, "data/traps/Off.png")
+                    self.objects.append(self.spikes)
+
+                else:
+                    self.spikes = Image(
+                        spikes_objeto[i][0], spikes_objeto[i][1] + (x * 48), 50, 50, "data/traps/Off.png")
+                    self.objects.append(self.spikes)
+
