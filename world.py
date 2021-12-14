@@ -1,6 +1,7 @@
 import pygame
 from utils import *
 from animations import *
+from estruturas import *
 
 
 class World():
@@ -37,13 +38,16 @@ class World():
         self.objects.append(self.waterfall)
 
     def plataform(self):
-        amount = 1
-        #scale = 3
-        posX = 220
-        posY = 500
+        for i in range(len(plataforms_objeto)):
+            for x in range(plataforms_objeto[i][2]):
 
-        for i in range(amount):
-            self.plataforms = Image(
-                posX, posY, 300, 50, "data/environment/plataform.png")
-            self.objects.append(self.plataforms)
-            self.collide.append(self.plataforms)
+                if plataforms_objeto[i][3] == 0:
+                    self.plataforms = Image(
+                        plataforms_objeto[i][0] + (x * 48), plataforms_objeto[i][1], 50, 50, "data/environment/plataform.png")
+                    self.objects.append(self.plataforms)
+                    self.collide.append(self.plataforms)
+                else:
+                    self.plataforms = Image(
+                        plataforms_objeto[i][0], plataforms_objeto[i][1] + (x * 48), 50, 50, "data/environment/plataform.png")
+                    self.objects.append(self.plataforms)
+                    self.collide.append(self.plataforms)
