@@ -6,27 +6,28 @@ HEIGHT = 720
 
 
 class Text():
-    def __init__(self, surface, msg, x, y, w, h, fontName, size, cr, cg, cb):
-        self.display_surface = surface
-        self.msg = msg or ""
+    def __init__(self, surface, msg, x, y, fontName, size, cr, cg, cb):
+        self.surface = surface
+        self.msg = msg
         self.x = x
         self.y = y
-        self.w = w
-        self.h = h
         self.size = size
-        self.fontName = os.path.join("data/fonts",fontName)
+        self.fontName = os.path.join("data/fonts", fontName)
         self.cr = cr
         self.cg = cg
         self.cb = cb
-        self.font = pygame.font.Font(self.fontName, self.size)
-        self.text = self.font.render(self.msg, True, (cr,cg,cb))
-        self.rect = self.text.get_rect()
+        self.swapMessage(self.msg)
 
     def update(self):
-        self.display_surface.blit(self.text, self.rect)
+        self.surface.blit(self.text, self.rect)
     
     def swapMessage(self, msg):
         self.msg = msg
+        self.font = pygame.font.Font(self.fontName, self.size)
+        self.text = self.font.render(self.msg, True, (self.cr, self.cg, self.cb))
+        self.rect = self.text.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
 
 
 class Image(pygame.sprite.Sprite):
