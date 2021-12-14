@@ -1,23 +1,32 @@
 import pygame
+import os
 
 WIDTH = 1280
 HEIGHT = 720
 
 
 class Text():
-    def __init__(self, text, x, y, w, h, fontName, size, cr, cg, cb):
-        self.text = text or ""
+    def __init__(self, surface, msg, x, y, w, h, fontName, size, cr, cg, cb):
+        self.display_surface = surface
+        self.msg = msg or ""
         self.x = x
         self.y = y
         self.w = w
         self.h = h
         self.size = size
-        self.fontName = fontName
-        self.folder = "data/fonts/"
+        self.fontName = os.path.join("data/fonts",fontName)
         self.cr = cr
         self.cg = cg
         self.cb = cb
-        self.font = pygame.font.SysFont(self.folder+self.font, self.size)
+        self.font = pygame.font.Font(self.fontName, self.size)
+        self.text = self.font.render(self.msg, True, (cr,cg,cb))
+        self.rect = self.text.get_rect()
+
+    def update(self):
+        self.display_surface.blit(self.text, self.rect)
+    
+    def swapMessage(self, msg):
+        self.msg = msg
 
 
 class Image(pygame.sprite.Sprite):
