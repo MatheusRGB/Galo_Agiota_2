@@ -15,6 +15,7 @@ class World():
         self.waterfall = None
         self.collide = []
         self.objects = []
+        self.traps = []
         self.objects.append(self.water)
         self.plataform()
         self.spike()
@@ -51,10 +52,13 @@ class World():
             for x in range(spikes_objeto[self.stage][i][2]):
                 if spikes_objeto[self.stage][i][3] == 0:
                     self.spikes = Image(
-                        spikes_objeto[self.stage][i][0] + (x * 50), spikes_objeto[self.stage][i][1], 50, 50, "data/traps/Off.png")
+                        spikes_objeto[self.stage][i][0] + (x * 50), spikes_objeto[self.stage][i][1], 50, 50,
+                        "data/traps/Off.png")
                     self.objects.append(self.spikes)
-
+                    self.traps.append(self.spikes)
                 else:
                     self.spikes = Image(
-                        spikes_objeto[self.stage][i][0], spikes_objeto[self.stage][i][1] + (x * 50), 50, 50, "data/traps/Off.png")
+                        spikes_objeto[self.stage][i][0], spikes_objeto[self.stage][i][1] + (x * 50), 50, 50,
+                        "data/traps/Off.png")
                     self.objects.append(self.spikes)
+                    self.traps.append(self.spikes)

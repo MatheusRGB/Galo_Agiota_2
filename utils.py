@@ -143,23 +143,3 @@ class Physics():
                     self.up = False
 
 
-    def GameOver(self):
-        limit = False
-        for i in range(len(self.world)):
-            up = self.world[i].rect.top - self.character.rect.bottom
-            down = self.world[i].rect.bottom - self.character.rect.top
-            left = self.world[i].rect.right - self.character.rect.left
-            right = self.world[i].rect.left - self.character.rect.right
-            width = left - right
-            height = down - up
-            if down > 0 and down < height-self.max_gravity:
-                if width - left == 0:
-                    print("morreu")
-                if width - left == width:
-                    print("morreu")
-            if down <= 0 and down+self.gravity >= 0:
-                if width - left > 0 and width - left < width:
-                    print("morreu")
-            if not limit:
-                self.left = 5
-                self.right = 5

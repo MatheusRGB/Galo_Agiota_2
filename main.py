@@ -1,4 +1,6 @@
 import pygame
+
+import characters
 from characters import *
 from world import *
 from utils import *
@@ -40,16 +42,21 @@ drawHowToPlay.add(ComoJogar.imagem1)
 drawHowToPlay.add(world.ground)
 drawHowToPlay.add(world.water)
 
-# Musicas
-
-# pygame.mixer.music.load("data/soundtrack/BossMusic.mp3")
-# pygame.mixer.music.play(-1)
-
 # Sons(Player/Ambiente)
 
 fps = pygame.time.Clock()
 
+# GameOver
+traps = Traps(player.animations, world.traps)
+
 MenuState = 1
+
+# Musicas
+pygame.mixer.music.load("data/soundtrack/MenuSong.mp3")
+pygame.mixer.music.play(-1)
+
+MenuMusic = pygame.mixer.Sound("data/soundtrack/MenuSong.mp3")
+GameMusic = pygame.mixer.Sound("data/soundtrack/GameSong.mp3")
 
 
 # Organizando as funçoes
@@ -66,9 +73,10 @@ def update():
     if MenuState == 0:
         drawGame.update()
         player.update()
+        traps.update()
+
     elif MenuState == 1:
         drawMenu.update()
-            # world.update()
 
 
 # Game rodando
@@ -82,14 +90,22 @@ if __name__ == '__main__':
                 GameLoop = False
 
             if event.type == pygame.KEYDOWN:  # Executar Som de Tiro
-                if event.key == pygame.K_p:  # Tecla para começar o jogo
+                if MenuState == 1 and event.key == pygame.K_p:  # Tecla para começar o jogo
                     MenuState = 0
+                    pygame.mixer.music.stop()
+                    GameMusic.play()
 
                 if event.key == pygame.K_c:  # Tecla para Menu Como Jogar
                     MenuState = 2
 
                 if MenuState == 2 and event.key == pygame.K_r:  # Pressione R para voltar para o Menu
                     MenuState = 1
+
+                if traps.stage == 1:  # GameOver, Volta para o menu
+                    MenuState = 1
+                    traps.stage = 0
+                    GameMusic.stop()
+                    MenuMusic.play()
 
                 if event.key == pygame.K_e:  # Tecla para sair do Jogo
                     GameLoop = False
