@@ -48,13 +48,13 @@ class World():
 
                 if plataforms_objeto[self.stage][i][3] == 0:
                     self.plataforms = Image(
-                        plataforms_objeto[self.stage][i][0] + (x * 48), plataforms_objeto[self.stage][i][1], 50, 50,
+                        plataforms_objeto[self.stage][i][0] + (x * 50), plataforms_objeto[self.stage][i][1], 50, 50,
                         "data/environment/plataform.png")
                     self.objects.append(self.plataforms)
                     self.collide.append(self.plataforms)
                 else:
                     self.plataforms = Image(
-                        plataforms_objeto[self.stage][i][0], plataforms_objeto[self.stage][i][1] + (x * 48), 50, 50,
+                        plataforms_objeto[self.stage][i][0], plataforms_objeto[self.stage][i][1] + (x * 50), 50, 50,
                         "data/environment/plataform.png")
                     self.objects.append(self.plataforms)
                     self.collide.append(self.plataforms)
@@ -65,10 +65,10 @@ class World():
 
                 if spikes_objeto[self.stage][i][3] == 0:
                     self.spikes = Image(
-                        spikes_objeto[self.stage][i][0] + (x * 48), spikes_objeto[self.stage][i][1], 50, 50, "data/traps/Off.png")
+                        spikes_objeto[self.stage][i][0] + (x * 50), spikes_objeto[self.stage][i][1], 50, 50, "data/traps/Off.png")
                     self.objects.append(self.spikes)
 
                 else:
                     self.spikes = Image(
-                        spikes_objeto[self.stage][i][0], spikes_objeto[self.stage][i][1] + (x * 48), 50, 50, "data/traps/Off.png")
+                        spikes_objeto[self.stage][i][0], spikes_objeto[self.stage][i][1] + (x * 50), 50, 50, "data/traps/Off.png")
                     self.objects.append(self.spikes)
