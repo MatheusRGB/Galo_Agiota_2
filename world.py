@@ -21,9 +21,7 @@ class World():
         self.waterfall = None
         self.collide = []
         self.objects = []
-        self.collide.append(self.ground)
         self.collide.append(self.plataforms)
-        self.objects.append(self.ground)
         self.objects.append(self.water)
         self.objects.append(self.plataforms)
         self.createAnimatedWater()

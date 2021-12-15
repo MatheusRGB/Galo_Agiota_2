@@ -87,7 +87,7 @@ if __name__ == '__main__':
                 if MenuState == 2 and event.key == pygame.K_r:  # Pressione R para voltar para o Menu
                     MenuState = 1
 
-                if event.key == pygame.K_e: # Tecla para sair do Jogo
+                if event.key == pygame.K_e:  # Tecla para sair do Jogo
                     GameLoop = False
 
         # Tela

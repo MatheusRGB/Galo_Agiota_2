@@ -5,7 +5,7 @@ from animations import *
 # Personagem principal
 class Player():
     def __init__(self, sprites):
-        self.animations = Animations(100, 100, 100, 100, "idle", 0.15, "data/character/", "Right", False)
+        self.animations = Animations(50, 550, 50, 50, "idle", 0.15, "data/character/", "Right", False)
         self.physics = Physics(self.animations, sprites)
         self.idle = True
         self.jump = False
