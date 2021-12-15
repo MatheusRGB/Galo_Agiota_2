@@ -42,32 +42,33 @@ class World():
         self.objects.append(self.waterfall)
 
     def plataform(self):
-        for i in range(len(plataforms_objeto)):
-            for x in range(plataforms_objeto[i][2]):
+        print(len(plataforms_objeto[self.stage]))
+        for i in range(len(plataforms_objeto[self.stage])):
+            for x in range(plataforms_objeto[self.stage][i][2]):
 
-                if plataforms_objeto[i][3] == 0:
+                if plataforms_objeto[self.stage][i][3] == 0:
                     self.plataforms = Image(
-                        plataforms_objeto[i][0] + (x * 48), plataforms_objeto[i][1], 50, 50,
+                        plataforms_objeto[self.stage][i][0] + (x * 48), plataforms_objeto[self.stage][i][1], 50, 50,
                         "data/environment/plataform.png")
                     self.objects.append(self.plataforms)
                     self.collide.append(self.plataforms)
                 else:
                     self.plataforms = Image(
-                        plataforms_objeto[i][0], plataforms_objeto[i][1] + (x * 48), 50, 50,
+                        plataforms_objeto[self.stage][i][0], plataforms_objeto[self.stage][i][1] + (x * 48), 50, 50,
                         "data/environment/plataform.png")
                     self.objects.append(self.plataforms)
                     self.collide.append(self.plataforms)
 
     def spike(self):
-        for i in range(len(spikes_objeto)):
-            for x in range(spikes_objeto[i][2]):
+        for i in range(len(spikes_objeto[self.stage])):
+            for x in range(spikes_objeto[self.stage][i][2]):
 
-                if spikes_objeto[i][3] == 0:
+                if spikes_objeto[self.stage][i][3] == 0:
                     self.spikes = Image(
-                        spikes_objeto[i][0] + (x * 48), spikes_objeto[i][1], 50, 50, "data/traps/Off.png")
+                        spikes_objeto[self.stage][i][0] + (x * 48), spikes_objeto[self.stage][i][1], 50, 50, "data/traps/Off.png")
                     self.objects.append(self.spikes)
 
                 else:
                     self.spikes = Image(
-                        spikes_objeto[i][0], spikes_objeto[i][1] + (x * 48), 50, 50, "data/traps/Off.png")
+                        spikes_objeto[self.stage][i][0], spikes_objeto[self.stage][i][1] + (x * 48), 50, 50, "data/traps/Off.png")
                     self.objects.append(self.spikes)
