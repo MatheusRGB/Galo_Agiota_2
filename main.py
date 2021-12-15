@@ -1,6 +1,4 @@
 import pygame
-
-import characters
 from characters import *
 from world import *
 from utils import *
@@ -25,15 +23,6 @@ drawGame.add(world.objects)
 
 # Menu do Jogo
 menu = Menu(None)
-
-drawMenu.add(menu.background)
-drawMenu.add(menu.logo)
-drawMenu.add(menu.galinhaMenu)
-drawMenu.add(menu.chao_animado)
-
-# Cenario do Menu
-drawMenu.add(world.water)
-drawMenu.add(menu.button1)
 
 # Menu Como Jogar
 ComoJogar = HowToPlay(None)
@@ -77,7 +66,10 @@ def update():
 
     elif MenuState == 1:
         drawMenu.update()
+        menu.update()
 
+# Cenario do Menu
+drawMenu.add(menu.objects)
 
 # Game rodando
 GameLoop = True
