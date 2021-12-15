@@ -27,10 +27,10 @@ menu = Menu(None)
 drawMenu.add(menu.background)
 drawMenu.add(menu.logo)
 drawMenu.add(menu.galinhaMenu)
+drawMenu.add(menu.chao_animado)
 
 # Cenario do Menu
 drawMenu.add(world.water)
-drawMenu.add(world.ground)
 drawMenu.add(menu.button1)
 
 # Menu Como Jogar
