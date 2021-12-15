@@ -12,7 +12,7 @@ class Menu:
         self.background = Image(0, 0, WIDTH, HEIGHT, "data/menu/MenuScreen.jpg")
         self.button1 = Image(522, 300, 160*1.25, 298 * 1.25, "data/menu/menu.png")
         self.logo = Image(380, 10, 1920/4, 1080/4, "data/menu/galo_slogan.png")   
-        self.arvore = Image(1280, 418, 726/4, 798/4, "data/menu/MenuTree.png")
+        self.arvore = Image(1280, 408, 726/3, 798/3, "data/menu/MenuTree.png")
         self.water = Image(0, HEIGHT - 50, WIDTH, 50, "data/environment/water/water.png")
         self.nuvem = Image(1200, 100, 726/5, 798/5, "data/menu/nuvem.png")
         self.nuvem2 = Image(1200, 250, 726/5, 798/5, "data/menu/nuvem.png")
