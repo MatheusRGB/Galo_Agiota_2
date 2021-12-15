@@ -8,7 +8,7 @@ class World():
     def __init__(self):
         self.stage = 0
         self.background = Image(0, 0, WIDTH, HEIGHT, "data/environment/bg.png")
-        self.ground = Image(0, HEIGHT - 125, WIDTH - 200, 75, "data/environment/ground.png")
+        self.ground = Image(0, HEIGHT - 125, WIDTH, 75, "data/environment/ground.png")
         self.water = Image(0, HEIGHT - 50, WIDTH, 50, "data/environment/water/water.png")
         self.plataforms = None
         self.spikes = None

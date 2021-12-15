@@ -25,11 +25,13 @@ drawGame.add(world.objects)
 menu = Menu(None)
 
 drawMenu.add(menu.background)
-drawMenu.add(menu.button1)
+drawMenu.add(menu.logo)
+drawMenu.add(menu.galinhaMenu)
 
 # Cenario do Menu
 drawMenu.add(world.water)
 drawMenu.add(world.ground)
+drawMenu.add(menu.button1)
 
 # Menu Como Jogar
 ComoJogar = HowToPlay(None)
@@ -64,7 +66,9 @@ def update():
     if MenuState == 0:
         drawGame.update()
         player.update()
-    # world.update()
+    elif MenuState == 1:
+        drawMenu.update()
+            # world.update()
 
 
 # Game rodando
