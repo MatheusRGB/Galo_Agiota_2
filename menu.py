@@ -16,4 +16,4 @@ class HowToPlay:
     def __init__(self, sprites):
         self.data = sprites
         self.background = Image(0, 0, WIDTH, HEIGHT, "data/menu/MenuScreen.jpg")
-        self.arrow = Image(250, 150, 130, 110, "data/menu/xyz.png")
+        self.imagem1 = Image(250, 150, 130, 110, "data/menu/KeyArrow.png")

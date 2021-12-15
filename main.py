@@ -34,7 +34,7 @@ drawMenu.add(world.ground)
 # Menu Como Jogar
 ComoJogar = HowToPlay(None)
 drawHowToPlay.add(ComoJogar.background)
-drawHowToPlay.add(ComoJogar.arrow)
+drawHowToPlay.add(ComoJogar.imagem1)
 drawHowToPlay.add(world.ground)
 drawHowToPlay.add(world.water)
 
