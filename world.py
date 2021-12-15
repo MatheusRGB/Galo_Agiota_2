@@ -6,7 +6,7 @@ from estruturas import *
 
 class World():
     def __init__(self):
-        self.stage = 3
+        self.stage = 2
         self.background = Image(0, 0, WIDTH, HEIGHT, "data/environment/bg.png")
         self.ground = Image(0, HEIGHT - 125, WIDTH, 75, "data/environment/ground.png")
         self.water = Image(0, HEIGHT - 50, WIDTH, 50, "data/environment/water/water.png")
@@ -52,13 +52,13 @@ class World():
             for x in range(spikes_objeto[self.stage][i][2]):
                 if spikes_objeto[self.stage][i][3] == 0:
                     self.spikes = Image(
-                        spikes_objeto[self.stage][i][0] + (x * 50), spikes_objeto[self.stage][i][1], 50, 50,
+                        spikes_objeto[self.stage][i][0] + (x * 50) + 10, spikes_objeto[self.stage][i][1] + 10, 30, 30,
                         "data/traps/Off.png")
                     self.objects.append(self.spikes)
                     self.traps.append(self.spikes)
                 else:
                     self.spikes = Image(
-                        spikes_objeto[self.stage][i][0], spikes_objeto[self.stage][i][1] + (x * 50), 50, 50,
+                        spikes_objeto[self.stage][i][0] + 10, spikes_objeto[self.stage][i][1] + (x * 50) + 10, 30, 30,
                         "data/traps/Off.png")
                     self.objects.append(self.spikes)
                     self.traps.append(self.spikes)
