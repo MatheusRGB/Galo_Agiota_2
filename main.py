@@ -147,7 +147,14 @@ if __name__ == '__main__':
 
         if GameSystem.dead == 1:  # GameOver, Volta para o menu
             MenuState = 1
-            GameSystem.dead = 0
+            CacheLevel = 0
+            drawGame.empty()
+            world = World(CacheLevel)
+            player = Player(world.collide, CacheLevel)
+            drawGame.add(world.background)
+            drawGame.add(player.animations)
+            drawGame.add(world.objects)
+            GameSystem = Game(player.animations, world.traps, world.flags, CacheLevel)
             GameMusic.stop()
             MenuMusic.stop()
             MenuMusic.play()
