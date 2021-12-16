@@ -4,15 +4,13 @@ from animations import *
 
 # Personagem principal
 class Player():
-    def __init__(self, sprites):
-        self.animations = Animations(50, 0, 50, 50, "idle", 0.15, "data/character/", "Right", False)
+    def __init__(self, sprites, CacheLevel):
+        self.animations = Animations(player_positions[CacheLevel][0][0],  player_positions[CacheLevel][0][1], 50, 50, "idle", 0.15, "data/character/", "Right", False)
         self.physics = Physics(self.animations, sprites)
         self.idle = True
         self.jump = False
         self.run = False
         self.keys = None
-        #50
-        #550
 
     def update(self):
         self.physics.update()
@@ -82,20 +80,3 @@ class Player():
                 self.jump = False
                 self.run = False
                 self.animations.swapAnimation(str)
-
-class Traps():
-    def __init__(self, sprites1, sprites2):
-        self.character = sprites1
-        self.spikes = sprites2
-        self.collide = False
-        self.left = 5
-        self.right = 5
-        self.fall = True
-        self.stage = 0
-
-    def update(self):
-        for i in range(len(self.spikes)):
-            self.collide = pygame.Rect.colliderect(self.character.rect, self.spikes[i])
-            if self.collide:
-                self.stage = 1
-                print("morreu")

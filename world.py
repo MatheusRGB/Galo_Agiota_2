@@ -5,20 +5,23 @@ from estruturas import *
 
 
 class World():
-    def __init__(self):
-        self.stage = 2
+    def __init__(self, stage):
+        self.stage = stage
         self.background = Image(0, 0, WIDTH, HEIGHT, "data/environment/bg.png")
         self.ground = Image(0, HEIGHT - 125, WIDTH, 75, "data/environment/ground.png")
         self.water = Image(0, HEIGHT - 50, WIDTH, 50, "data/environment/water/water.png")
         self.plataforms = None
         self.spikes = None
+        self.flag = None
         self.waterfall = None
         self.collide = []
         self.objects = []
         self.traps = []
+        self.flags = []
         self.objects.append(self.water)
         self.plataform()
         self.spike()
+        self.finish()
         self.createAnimatedWater()
 
     def createAnimatedWater(self):
@@ -34,12 +37,12 @@ class World():
 
     def plataform(self):
         image = "data/environment/plataform.png"
-        if self.stage != 0:
+        if self.stage == 1 or self.stage == 3:
             image = "data/environment/stone.png"
         for i in range(len(plataforms_objeto[self.stage])):
             for x in range(plataforms_objeto[self.stage][i][2]):
                 if plataforms_objeto[self.stage][i][3] == 0:
-                    self.plataforms = Image( plataforms_objeto[self.stage][i][0] + (x * 50), plataforms_objeto[self.stage][i][1], 50, 50, image)
+                    self.plataforms = Image(plataforms_objeto[self.stage][i][0] + (x * 50), plataforms_objeto[self.stage][i][1], 50, 50, image)
                     self.objects.append(self.plataforms)
                     self.collide.append(self.plataforms)
                 else:
@@ -51,14 +54,16 @@ class World():
         for i in range(len(spikes_objeto[self.stage])):
             for x in range(spikes_objeto[self.stage][i][2]):
                 if spikes_objeto[self.stage][i][3] == 0:
-                    self.spikes = Image(
-                        spikes_objeto[self.stage][i][0] + (x * 50) + 10, spikes_objeto[self.stage][i][1] + 10, 30, 30,
-                        "data/traps/Off.png")
+                    self.spikes = Image(spikes_objeto[self.stage][i][0] + (x * 50) + 10, spikes_objeto[self.stage][i][1] + 10, 30, 30, "data/traps/Off.png")
                     self.objects.append(self.spikes)
                     self.traps.append(self.spikes)
                 else:
-                    self.spikes = Image(
-                        spikes_objeto[self.stage][i][0] + 10, spikes_objeto[self.stage][i][1] + (x * 50) + 10, 30, 30,
-                        "data/traps/Off.png")
+                    self.spikes = Image(spikes_objeto[self.stage][i][0] + 10, spikes_objeto[self.stage][i][1] + (x * 50) + 10, 30, 30, "data/traps/Off.png")
                     self.objects.append(self.spikes)
                     self.traps.append(self.spikes)
+
+    def finish(self):
+        for i in range(len(flags_objeto[self.stage])):
+            self.flag = Image(flags_objeto[self.stage][i][0], flags_objeto[self.stage][i][1], 30, 30, "data/environment/GameFlag.png")
+            self.objects.append(self.flag)
+            self.flags.append(self.flag)

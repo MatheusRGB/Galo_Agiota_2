@@ -1,5 +1,6 @@
 import pygame
 import os
+from estruturas import *
 
 WIDTH = 1280
 HEIGHT = 720
@@ -143,3 +144,33 @@ class Physics():
                     self.up = False
 
 
+class Game():
+    def __init__(self, sprites1, sprites2, sprites3, stage):
+        self.character = sprites1
+        self.spikes = sprites2
+        self.flags = sprites3
+        self.collideTrap = False
+        self.collideFlag = False
+        self.dead = 0
+        self.level = stage
+
+    def update(self):
+        self.isDead()
+        self.isFinished()
+
+    def isDead(self):
+        for i in range(len(self.spikes)):
+            self.collideTrap = pygame.Rect.colliderect(self.character.rect, self.spikes[i])
+            if self.collideTrap:
+                self.character.rect.x = player_positions[self.level][0][0]
+                self.character.rect.y = player_positions[self.level][0][1]
+                self.dead = 1
+                self.level = 0
+                break
+
+    def isFinished(self):
+        for i in range(len(self.flags)):
+            self.collideFlag = pygame.Rect.colliderect(self.character.rect, self.flags[i])
+            if self.collideFlag:
+                self.level += 1
+                break
