@@ -1,19 +1,22 @@
 import pygame
 import os
-#from estruturas import *
-#from world import *
-#from characters import *
+
+# from estruturas import *
+# from world import *
+# from characters import *
 
 WIDTH = 1280
 HEIGHT = 720
 
 
 class Text():
-    def __init__(self, surface, msg, x, y, fontName, size, cr, cg, cb):
+    def __init__(self, surface, msg, x, y, orientationX, orientationY, fontName, size, cr, cg, cb):
         self.surface = surface
         self.msg = msg
         self.x = x
         self.y = y
+        self.orientationX = orientationX
+        self.orientationY = orientationY
         self.size = size
         self.fontName = os.path.join("data/fonts", fontName)
         self.cr = cr
@@ -23,14 +26,18 @@ class Text():
 
     def update(self):
         self.surface.blit(self.text, self.rect)
-    
+
     def swapMessage(self, msg):
         self.msg = msg
         self.font = pygame.font.Font(self.fontName, self.size)
         self.text = self.font.render(self.msg, True, (self.cr, self.cg, self.cb))
         self.rect = self.text.get_rect()
         self.rect.x = self.x
+        if self.orientationX == "center":
+            self.rect.x = (WIDTH / 2) - self.rect.w / 2
         self.rect.y = self.y
+        if self.orientationY == "center":
+            self.rect.y = (HEIGHT / 2) - self.rect.h / 2
 
 
 class Image(pygame.sprite.Sprite):
@@ -66,8 +73,8 @@ class Physics():
         self.height = 180
         self.diff = None
         self.diff_max = None
-        self.min_gravity = 3
-        self.max_gravity = 11
+        self.min_gravity = 4
+        self.max_gravity = 8
         self.gravity = self.min_gravity
         self.smooth = 1
 
@@ -90,14 +97,14 @@ class Physics():
             right = self.world[i].rect.left - self.character.rect.right
             width = left - right
             height = down - up
-            if down > 0 and down < height-self.max_gravity:
+            if down > 0 and down < height - self.max_gravity:
                 if width - left == 0:
                     self.right = 0
                     limit = True
                 if width - left == width:
                     self.left = 0
                     limit = True
-            if down <= 0 and down+self.gravity >= 0:
+            if down <= 0 and down + self.gravity >= 0:
                 if width - left > 0 and width - left < width:
                     self.collide = False
                     self.fall = True
@@ -112,7 +119,7 @@ class Physics():
             self.up = False
         if not self.diff:
             self.diff = self.character.rect.y
-            self.diff_max = self.diff-self.height
+            self.diff_max = self.diff - self.height
         else:
             if self.character.rect.y <= self.diff_max:
                 self.fall = True
@@ -144,4 +151,3 @@ class Physics():
                 if self.aux[0] < self.aux[1]:
                     self.fall = True
                     self.up = False
-
