@@ -1,8 +1,9 @@
 import pygame
-from characters import *
-from world import *
+#from characters import *
+#from world import *
 from utils import *
 from menu import *
+from game import *
 
 # Initiation
 pygame.init()
@@ -15,12 +16,15 @@ drawMenu = pygame.sprite.Group()  # Menu
 drawHowToPlay = pygame.sprite.Group()  # Como jogar
 
 # Cenario de Jogo
-CacheLevel = 0
-world = World(CacheLevel)
-player = Player(world.collide, CacheLevel)
-drawGame.add(world.background)
-drawGame.add(player.animations)
-drawGame.add(world.objects)
+GameSystem = Game()
+# CacheLevel = 0
+
+def initRender():
+    drawGame.add(GameSystem.world.background)
+    drawGame.add(GameSystem.player.animations)
+    drawGame.add(GameSystem.world.objects)
+
+initRender()
 
 # Menu do Jogo
 menu = Menu()
@@ -35,8 +39,8 @@ drawMenu.add(menu.objects)
 ComoJogar = HowToPlay()
 drawHowToPlay.add(ComoJogar.background)
 drawHowToPlay.add(ComoJogar.imagem1)
-drawHowToPlay.add(world.ground)
-drawHowToPlay.add(world.water)
+drawHowToPlay.add(GameSystem.world.ground)
+drawHowToPlay.add(GameSystem.world.water)
 
 font = pygame.font.Font('data/fonts/8bits.ttf', 30)
 
@@ -66,7 +70,7 @@ textRect6 = text.get_rect()
 textRect6 = (350, 300)
 
 # Controladora do jogo
-GameSystem = Game(player.animations, world.traps, world.flags, CacheLevel)
+
 
 # Musicas
 MenuMusic = pygame.mixer.Sound("data/soundtrack/MenuSong.mp3")
@@ -77,7 +81,7 @@ MenuMusic.play()
 fps = pygame.time.Clock()
 
 #Fim de fases
-fim = Game(player.animations, world.traps,world.flags, CacheLevel)
+# fim = Game(player.animations, world.traps,world.flags, CacheLevel)
 
 # Organizando as funçoes
 def draw():
@@ -98,7 +102,7 @@ def draw():
 def update():
     if MenuState == 0:
         drawGame.update()
-        player.update()
+        GameSystem.player.update()
         GameSystem.update()
     elif MenuState == 1:
         drawMenu.update()
@@ -134,40 +138,23 @@ if __name__ == '__main__':
                 if event.key == pygame.K_h and MenuState == 1:
                     GameSystem.level = 2
 
-                if event.key == pygame.K_o:
-                    if GameSystem.level < 5:
-                        GameSystem.level += 1
-                    if GameSystem.level == 4:
-                        MenuState = 1
-                        GameMusic.stop()
-                        MenuMusic.play()
-                        GameSystem.level = 0
+                if event.key == pygame.K_o: # Tecla para pular de fase
+                    drawGame.empty()
+                    GameSystem.nextLevel()
+                    GameSystem.createStage()
+                    initRender()
 
 
-
-        if GameSystem.dead == 1:  # GameOver, Volta para o menu
+        if GameSystem.dead or GameSystem.gameover:  # GameOver, Volta para o menu
+            GameSystem.gameover = False
+            GameSystem.dead = False
             MenuState = 1
-            CacheLevel = 0
             drawGame.empty()
-            world = World(CacheLevel)
-            player = Player(world.collide, CacheLevel)
-            drawGame.add(world.background)
-            drawGame.add(player.animations)
-            drawGame.add(world.objects)
-            GameSystem = Game(player.animations, world.traps, world.flags, CacheLevel)
+            initRender()
             GameMusic.stop()
             MenuMusic.stop()
             MenuMusic.play()
-        if GameSystem.level != world.stage:
-            if CacheLevel < GameSystem.level:
-                CacheLevel = GameSystem.level
-            drawGame.empty()
-            world = World(CacheLevel)
-            player = Player(world.collide, CacheLevel)
-            drawGame.add(world.background)
-            drawGame.add(player.animations)
-            drawGame.add(world.objects)
-            GameSystem = Game(player.animations, world.traps, world.flags, CacheLevel)
+
 
         # Tela
 
