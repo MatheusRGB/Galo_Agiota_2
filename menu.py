@@ -57,8 +57,8 @@ class HowToPlay:
         self.text1 = Text(surface, "Use essas teclas para mover o Galo Agiota Jr", 0, 200, "center", "" ,"8bits.ttf", 30, 0, 0, 0, )
         self.text2 = Text(surface, "Chegue ate a bandeira para avancar de fase.", 0,270, "center", "", "8bits.ttf",30, 0, 0, 0, )
         self.text3 = Text(surface, "EVITE AS ARMADILHAS!"                     , 0, 340, "center", "", "8bits.ttf", 30,0, 0, 0, )
-        self.text4 = Text(surface, "Aperte R para voltar.",                     0, 410, "center", "", "8bits.ttf", 30,0, 0, 0, )
-        self.text5 = Text(surface, "Para Jogar o modo dificil aperte H e depois aperte P.", 0, 480, "center", "", "8bits.ttf", 30,0, 0, 0, )
+        self.text4 = Text(surface, "Aperte R para voltar.",                     0, 570, "center", "", "8bits.ttf", 30,0, 0, 0, )
+        self.text5 = Text(surface, "Para Jogar o modo dificil aperte H e depois aperte P.", 0, 410, "center", "", "8bits.ttf", 30,0, 0, 0, )
 
     def update(self):
         self.text1.update()
