@@ -1,6 +1,4 @@
 import pygame
-# from characters import *
-# from world import *
 from utils import *
 from menu import *
 from game import *
@@ -26,7 +24,6 @@ def initRender():
 
 
 initRender()
-time = pygame.time.get_ticks()
 
 # Menu do Jogo
 menu = Menu(display)
@@ -89,12 +86,14 @@ if __name__ == '__main__':
     while GameLoop:
 
         fps.tick(60)
-
+        #menustate 0 jogando
+        #menustate 1 menu principal
+        #menustate 2 como jogar
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # Sair do Jogo
                 GameLoop = False
 
-            if event.type == pygame.KEYDOWN:  # Executar Som de Tiro
+            if event.type == pygame.KEYDOWN:
                 if MenuState == 1 and event.key == pygame.K_p:  # Tecla para começar o jogo
                     MenuState = 0
                     stopmusic()

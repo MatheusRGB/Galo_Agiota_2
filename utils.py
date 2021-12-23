@@ -1,10 +1,6 @@
 import pygame
 import os
 
-# from estruturas import *
-# from world import *
-# from characters import *
-
 WIDTH = 1280
 HEIGHT = 720
 
