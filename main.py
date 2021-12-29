@@ -30,27 +30,23 @@ menu = Menu(display)
 
 # Inicia o jogo no menu
 MenuState = 1
+#MenuState 0 jogando
+#MenuState 1 menu principal
+#MenuState 2 como jogar
 
 # Cenario do Menu
 drawMenu.add(menu.objects)
 
 # Menu Como Jogar
-ComoJogar = HowToPlay(display)
-drawHowToPlay.add(ComoJogar.background)
-drawHowToPlay.add(ComoJogar.imagem1)
-drawHowToPlay.add(ComoJogar.imagem2)
-drawHowToPlay.add(ComoJogar.imagem3)
-
+howToPlay = HowToPlay(display)
+drawHowToPlay.add(howToPlay.objects)
 drawHowToPlay.add(GameSystem.world.ground)
 drawHowToPlay.add(GameSystem.world.water)
 
 # Musicas
 MenuMusic = pygame.mixer.Sound("data/soundtrack/MenuSong.mp3")
 GameMusic = pygame.mixer.Sound("data/soundtrack/GameSong.mp3")
-MenuMusic.play()
-
-# Fps do jogo
-fps = pygame.time.Clock()
+MenuMusic.play() # Inicia a musica do menu
 
 
 def stopmusic():
@@ -77,28 +73,36 @@ def update():
         drawMenu.update()
         menu.update()
     elif MenuState == 2:
-        ComoJogar.update()
+        howToPlay.update()
 
 
+def startGame():
+    stopmusic()
+    drawGame.empty()
+    GameSystem.playing = True
+    GameSystem.points = 0
+    GameSystem.createStage()
+    GameMusic.play()
+    initRender()
+
+
+# Fps do jogo
+fps = pygame.time.Clock()
 # Game rodando
 GameLoop = True
 if __name__ == '__main__':
     while GameLoop:
-
         fps.tick(60)
-        #menustate 0 jogando
-        #menustate 1 menu principal
-        #menustate 2 como jogar
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # Sair do Jogo
                 GameLoop = False
 
             if event.type == pygame.KEYDOWN:
-                if MenuState == 1 and event.key == pygame.K_p:  # Tecla para começar o jogo
+                if MenuState == 1 and event.key == pygame.K_p:  # Tecla para começar o jogo 
                     MenuState = 0
-                    stopmusic()
-                    GameMusic.play()
-                    GameSystem.playing = True
+                    GameSystem.hard = False
+                    startGame()
 
                 if event.key == pygame.K_c:  # Tecla para Menu Como Jogar
                     MenuState = 2
@@ -109,24 +113,16 @@ if __name__ == '__main__':
                 if event.key == pygame.K_e:  # Tecla para sair do Jogo
                     GameLoop = False
 
-                if event.key == pygame.K_h and MenuState == 1:
+                if event.key == pygame.K_h and MenuState == 1: # Modo dificil
                     MenuState = 0
-                    stopmusic()
-                    GameMusic.play()
-                    drawGame.empty()
-                    GameSystem.level = 2
-                    GameSystem.createStage()
-                    initRender()
-                    GameSystem.playing = True
+                    GameSystem.hard = True
+                    startGame()
 
                 if event.key == pygame.K_o and MenuState == 0:  # Tecla para pular de fase
-                    drawGame.empty()
                     GameSystem.nextLevel()
-                    GameSystem.createStage()
-                    initRender()
-                    GameSystem.playing = True
+                    startGame()
 
-        if GameSystem.collideFlag:
+        if GameSystem.collideFlag: # Atualizando sprites da tela e pontos do menu
             drawGame.empty()
             initRender()
             if menu.points < GameSystem.points:
@@ -140,8 +136,6 @@ if __name__ == '__main__':
             initRender()
             stopmusic()
             MenuMusic.play()
-
-        # Tela
 
         draw()
         update()

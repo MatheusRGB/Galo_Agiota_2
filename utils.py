@@ -66,7 +66,7 @@ class Physics():
         self.aux = []
         self.aux.append(self.character.rect.y)
         self.up = not self.fall
-        self.height = 180
+        self.height = 160
         self.diff = None
         self.diff_max = None
         self.min_gravity = 4

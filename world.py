@@ -1,27 +1,22 @@
-import pygame
 from utils import *
 from animations import *
-from estruturas import *
+from structures import *
 
 
 class World():
-    def __init__(self, stage):
+    def __init__(self, stage, hard):
         self.stage = stage
+        self.hard = hard
         self.background = Image(0, 0, WIDTH, HEIGHT, "data/environment/bg.png")
         self.ground = Image(0, HEIGHT - 125, WIDTH, 75, "data/environment/ground.png")
         self.water = Image(0, HEIGHT - 50, WIDTH, 50, "data/environment/water/water.png")
-        self.plataforms = None
-        self.spikes = None
-        self.flag = None
-        self.waterfall = None
+        self.object = None
         self.collide = []
         self.objects = []
         self.traps = []
         self.flags = []
         self.objects.append(self.water)
-        self.plataform()
-        self.spike()
-        self.finish()
+        self.generateWorld()
         self.createAnimatedWater()
 
     def createAnimatedWater(self):
@@ -30,40 +25,29 @@ class World():
         posX = 230
         posY = -35
         for i in range(amount):
-            self.waterfall = Animations(posX, posY + (i * (24 * scale)), 16 * scale,24 * scale, "fall", 0.15, "data/environment/water/", "Left", True)
-            self.objects.append(self.waterfall)
-        self.waterfall = Animations(posX, posY + (amount * (24 * scale) - 24), 16 * scale, 8 * scale, "fall-bottom", 0.15, "data/environment/water/", "Left", True)
-        self.objects.append(self.waterfall)
+            self.object = Animations(posX, posY + (i * (24 * scale)), 16 * scale,24 * scale, "fall", 0.15, "data/environment/water/", "Left", True)
+            self.objects.append(self.object)
+        self.object = Animations(posX, posY + (amount * (24 * scale) - 24), 16 * scale, 8 * scale, "fall-bottom", 0.15, "data/environment/water/", "Left", True)
+        self.objects.append(self.object)
 
-    def plataform(self):
-        image = "data/environment/plataform.png"
-        if self.stage == 1 or self.stage == 3:
-            image = "data/environment/stone.png"
-        for i in range(len(plataforms_objeto[self.stage])):
-            for x in range(plataforms_objeto[self.stage][i][2]):
-                if plataforms_objeto[self.stage][i][3] == 0:
-                    self.plataforms = Image(plataforms_objeto[self.stage][i][0] + (x * 50), plataforms_objeto[self.stage][i][1], 50, 50, image)
-                    self.objects.append(self.plataforms)
-                    self.collide.append(self.plataforms)
-                else:
-                    self.plataforms = Image(plataforms_objeto[self.stage][i][0], plataforms_objeto[self.stage][i][1] + (x * 50), 50, 50, image)
-                    self.objects.append(self.plataforms)
-                    self.collide.append(self.plataforms)
+    def generateWorld(self):
+        self.createObjectsWorld(PLATAFORMS_OBJECT, "plataforms")
+        self.createObjectsWorld(SPIKES_OBJECT, "traps")
+        if self.hard:
+            self.createObjectsWorld(SPIKES_OBJECT_HARD, "traps")
+        self.createObjectsWorld(FLAGS_OBJECT, "flags")
 
-    def spike(self):
-        for i in range(len(spikes_objeto[self.stage])):
-            for x in range(spikes_objeto[self.stage][i][2]):
-                if spikes_objeto[self.stage][i][3] == 0:
-                    self.spikes = Image(spikes_objeto[self.stage][i][0] + (x * 50) + 10, spikes_objeto[self.stage][i][1] + 10, 30, 30, "data/traps/Off.png")
-                    self.objects.append(self.spikes)
-                    self.traps.append(self.spikes)
-                else:
-                    self.spikes = Image(spikes_objeto[self.stage][i][0] + 10, spikes_objeto[self.stage][i][1] + (x * 50) + 10, 30, 30, "data/traps/Off.png")
-                    self.objects.append(self.spikes)
-                    self.traps.append(self.spikes)
-
-    def finish(self):
-        for i in range(len(flags_objeto[self.stage])):
-            self.flag = Image(flags_objeto[self.stage][i][0], flags_objeto[self.stage][i][1], 30, 30, "data/environment/GameFlag.png")
-            self.objects.append(self.flag)
-            self.flags.append(self.flag)
+    def createObjectsWorld(self, data, type):
+        for i in range(len(data[self.stage])):
+            for x in range(data[self.stage][i][4]):
+                if data[self.stage][i][5] == "horizontal":
+                    self.object = Image(data[self.stage][i][0] + (x * data[self.stage][i][2]), data[self.stage][i][1], data[self.stage][i][2], data[self.stage][i][3], data[self.stage][i][6])
+                elif data[self.stage][i][5] == "vertical":
+                    self.object = Image(data[self.stage][i][0], data[self.stage][i][1] + (x * data[self.stage][i][3]), data[self.stage][i][2], data[self.stage][i][3], data[self.stage][i][6])
+                self.objects.append(self.object)
+                if type == "plataforms":
+                    self.collide.append(self.object)
+                elif type == "traps":
+                    self.traps.append(self.object)
+                elif type == "flags":
+                    self.flags.append(self.object)

@@ -1,12 +1,12 @@
 import pygame
 from utils import *
 from animations import *
-from estruturas import *
+from structures import *
 
 # Personagem principal
 class Player():
     def __init__(self, sprites, level):
-        self.animations = Animations(player_positions[level][0][0],  player_positions[level][0][1], 50, 50, "idle", 0.15, "data/character/", "Right", False)
+        self.animations = Animations(PLAYER_POSITIONS[level][0][0],  PLAYER_POSITIONS[level][0][1], 50, 50, "idle", 0.15, "data/character/", "Right", False)
         self.physics = Physics(self.animations, sprites)
         self.idle = True
         self.jump = False

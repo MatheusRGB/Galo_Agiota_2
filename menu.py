@@ -1,4 +1,3 @@
-import pygame
 from utils import *
 from world import *
 from animations import *
@@ -54,11 +53,16 @@ class HowToPlay:
         self.imagem1 = Image(210, 130, 120, 100, "data/menu/KeyArrow.png")
         self.imagem2 = Image(270, 250, 55, 65, "data/environment/GameFlag.png")
         self.imagem3 = Image(430, 330, 40, 40, "data/traps/Off.png")
-        self.text1 = Text(surface, "Use essas teclas para mover o Galo Agiota Jr", 0, 200, "center", "" ,"8bits.ttf", 30, 0, 0, 0, )
-        self.text2 = Text(surface, "Chegue ate a bandeira para avancar de fase.", 0,270, "center", "", "8bits.ttf",30, 0, 0, 0, )
-        self.text3 = Text(surface, "EVITE AS ARMADILHAS!"                     , 0, 340, "center", "", "8bits.ttf", 30,0, 0, 0, )
-        self.text4 = Text(surface, "Aperte R para voltar.",                     0, 570, "center", "", "8bits.ttf", 30,0, 0, 0, )
-        self.text5 = Text(surface, "Para Jogar o modo dificil aperte H e depois aperte P.", 0, 410, "center", "", "8bits.ttf", 30,0, 0, 0, )
+        self.text1 = Text(surface, "Use essas teclas para mover o Galo Agiota Jr", 0, 200, "center", "" ,"8bits.ttf", 30, 0, 0, 0)
+        self.text2 = Text(surface, "Chegue ate a bandeira para avancar de fase.", 0, 270, "center", "", "8bits.ttf",30, 0, 0, 0)
+        self.text3 = Text(surface, "EVITE AS ARMADILHAS!", 0, 340, "center", "", "8bits.ttf", 30, 0, 0, 0)
+        self.text4 = Text(surface, "Aperte R para voltar.", 0, 570, "center", "", "8bits.ttf", 30, 0, 0, 0)
+        self.text5 = Text(surface, "Para Jogar o modo dificil aperte H no menu principal.", 0, 410, "center", "", "8bits.ttf", 30, 0, 0, 0)
+        self.objects = []
+        self.objects.append(self.background)
+        self.objects.append(self.imagem1)
+        self.objects.append(self.imagem2)
+        self.objects.append(self.imagem3)
 
     def update(self):
         self.text1.update()
