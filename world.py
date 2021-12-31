@@ -31,19 +31,20 @@ class World():
         self.objects.append(self.object)
 
     def generateWorld(self):
-        self.createObjectsWorld(PLATAFORMS_OBJECT, "plataforms")
-        self.createObjectsWorld(SPIKES_OBJECT, "traps")
+        self.createObjectsWorld(PLATAFORMS_OBJECT[self.stage], "plataforms")
+        self.createObjectsWorld(SPIKES_OBJECT[self.stage], "traps")
         if self.hard:
-            self.createObjectsWorld(SPIKES_OBJECT_HARD, "traps")
-        self.createObjectsWorld(FLAGS_OBJECT, "flags")
+            self.createObjectsWorld(SPIKES_OBJECT_HARD[self.stage], "traps")
+        self.createObjectsWorld(FLAGS_OBJECT[self.stage], "flags")
 
     def createObjectsWorld(self, data, type):
-        for i in range(len(data[self.stage])):
-            for x in range(data[self.stage][i][4]):
-                if data[self.stage][i][5] == "horizontal":
-                    self.object = Image(data[self.stage][i][0] + (x * data[self.stage][i][2]), data[self.stage][i][1], data[self.stage][i][2], data[self.stage][i][3], data[self.stage][i][6])
-                elif data[self.stage][i][5] == "vertical":
-                    self.object = Image(data[self.stage][i][0], data[self.stage][i][1] + (x * data[self.stage][i][3]), data[self.stage][i][2], data[self.stage][i][3], data[self.stage][i][6])
+        for i in range(len(data)):
+            for j in range(data[i][4]):
+                x , y , w , h , orientation, image = data[i][0], data[i][1], data[i][2], data[i][3], data[i][5], data[i][6]
+                if orientation == "horizontal":
+                    self.object = Image(x + (j * w), y, w, h, image)
+                elif orientation == "vertical":
+                    self.object = Image(x, y + (j * h), w, h, image)
                 self.objects.append(self.object)
                 if type == "plataforms":
                     self.collide.append(self.object)
