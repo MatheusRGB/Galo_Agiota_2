@@ -16,7 +16,7 @@ class Menu:
         self.water = Image(0, HEIGHT - 50, WIDTH, 50, "data/environment/water/water.png")
         self.nuvem = Image(1200, 100, 726/5, 798/5, "data/menu/nuvem.png")
         self.nuvem2 = Image(1200, 250, 726/5, 798/5, "data/menu/nuvem.png")
-        self.galinhaMenu = Animations(100, 550, 50, 50, "run", 0.15, "data/menu/", "Right", True)
+        self.galinhaMenu = Animations(100, 550, 50, 50, "run", 0.15, "data/character/", "Right", True)
         self.chao_animado = Animations(0, HEIGHT - 125, WIDTH, 75, "chao", 0.15, "data/menu/", "Right", True)
         self.objects = []
         self.objects.append(self.background)
