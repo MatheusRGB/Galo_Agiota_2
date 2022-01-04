@@ -2,7 +2,7 @@ from utils import *
 from animations import *
 from structures import *
 
-
+# Inicia a classe do mundo, com suas caracteristicas iniciais (Background, chão ....)
 class World():
     def __init__(self, stage, hard):
         self.stage = stage
@@ -18,7 +18,7 @@ class World():
         self.objects.append(self.water)
         self.generateWorld()
         self.createAnimatedWater()
-
+    # Função para iniciar a cachoeira animada
     def createAnimatedWater(self):
         amount = 10
         scale = 3
@@ -29,14 +29,14 @@ class World():
             self.objects.append(self.object)
         self.object = Animations(posX, posY + (amount * (24 * scale) - 24), 16 * scale, 8 * scale, "fall-bottom", 0.15, "data/environment/water/", "Left", True)
         self.objects.append(self.object)
-
+    # Função para popular a telas, alocar traps , plataformas...
     def generateWorld(self):
         self.createObjectsWorld(PLATAFORMS_OBJECT[self.stage], "plataforms")
         self.createObjectsWorld(SPIKES_OBJECT[self.stage], "traps")
         if self.hard:
             self.createObjectsWorld(SPIKES_OBJECT_HARD[self.stage], "traps")
         self.createObjectsWorld(FLAGS_OBJECT[self.stage], "flags")
-
+    # Função usada para populas a tela, alocar os objetos nos respectivos x e y
     def createObjectsWorld(self, data, type):
         for i in range(len(data)):
             for j in range(data[i][4]):

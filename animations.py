@@ -1,6 +1,7 @@
 import pygame
 import os
 
+# Classe das animações
 class Animations(pygame.sprite.Sprite):
     def __init__(self, x, y, w, h, action, speed, folder, orientation, loop):
         pygame.sprite.Sprite.__init__(self)
@@ -31,23 +32,27 @@ class Animations(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (self.w, self.h))
         self.flipAnimation()
 
+    # Função para atualizar as animações
     def update(self):
         if self.loop:
             self.animation(self.loop)
 
+    # Função para iniciar o loop das animações
     def swapAnimation(self, str):
         self.action = str
         self.sprites = []
         for dir, _, files in os.walk(self.folder):
             for file in files:
                 if dir == self.folder + self.action:
-                    self.sprites.append(pygame.image.load(os.path.join(dir, file)))
+                    self.sprites.append(
+                        pygame.image.load(os.path.join(dir, file)))
         self.current = 0
         self.size = len(self.sprites)
         self.image = self.sprites[self.current]
         self.image = pygame.transform.scale(self.image, (self.w, self.h))
         self.flipAnimation()
 
+    # Função para rotacionar a direção da imagem
     def flipAnimation(self):
         if self.orientation == "Right":
             self.inverted = self.bool

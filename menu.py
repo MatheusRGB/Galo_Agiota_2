@@ -4,7 +4,7 @@ from animations import *
 
 # Menu Principal
 
-
+# Classe do menu, com todas as imagens e animações
 class Menu:
     def __init__(self, surface):
         self.points = 0
@@ -29,7 +29,7 @@ class Menu:
         self.objects.append(self.logo)
         self.objects.append(self.button1)
 
-
+    # Função de atualização da pontuação e posição dos objetos passando no menu
     def update(self):
         self.highpoints.update()
         self.highpoints.swapMessage("Melhor Pontuacao: "+ str(self.points))
@@ -46,7 +46,7 @@ class Menu:
         if self.nuvem2.rect.x < -125:
             self.nuvem2.rect.x = 1280
 
-
+# Classe do menu como jogar, com todas as imagens
 class HowToPlay:
     def __init__(self, surface):
         self.background = Image(0, 0, WIDTH, HEIGHT, "data/menu/MenuScreen.jpg")
@@ -63,7 +63,7 @@ class HowToPlay:
         self.objects.append(self.imagem1)
         self.objects.append(self.imagem2)
         self.objects.append(self.imagem3)
-
+    # Funçãp de atualização
     def update(self):
         self.text1.update()
         self.text2.update()
